@@ -13,11 +13,15 @@ include_once "Adatbazis.php";
 <body>
     <?php
     $adatbazis = new Adatbazis();
-    $matrix = $adatbazis->adatLeker("kep", "szin");
-    $adatbazis->megjelenit($matrix);
+    //$matrix = $adatbazis->adatLeker("kep", "szin");
+    //$adatbazis->megjelenit($matrix);
     if ($adatbazis->sorokSzama("kartya") == 0) {
         $adatbazis->karytaFeltolt();
     }
+    $adatbazis->modosit("szin", "nev", "green", "zöld");
+    $adatbazis->torles("szin", "nev", "zöld");
+    $ujMatrix = $adatbazis->adatLeker2("nev", "kep", "szin");
+    $adatbazis->megjelenit2($ujMatrix);
     $adatbazis->kapcsolatBezar();
     ?>
 

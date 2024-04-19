@@ -14,6 +14,7 @@ class Adatbazis
             $this->jelszo,
             $this->adatbazis
         );
+        $this->kapcsolat->query("SET NAMES UTF8");
     }
 
     public function adatLeker($oszlop, $tabla)
@@ -27,7 +28,30 @@ class Adatbazis
             echo "<img src=\"forras/$sor[0]\" alt=\"forras/$sor[0]\">";
         }
     }
-
+    public function adatLeker2($oszlop1, $oszlop2, $tabla)
+    {
+        $sql = "SELECT $oszlop1, $oszlop2 FROM $tabla";
+        return $this->kapcsolat->query($sql);
+    }
+    public function megjelenit2($matrix)
+    {
+        echo "<table>";
+        echo "<tr><th>NÉV</th><th>KÉP</th></tr>";
+        while ($sor = $matrix->fetch_row()) {
+            echo "<tr><td>$sor[0]</td><td><img src='forras/$sor[1]' alt='semmi'></td></tr>";
+        }
+        echo "</table>";
+    }
+    public function modosit($tabla, $oszlop, $regi, $uj)
+    {
+        $sql = "UPDATE $tabla SET $oszlop = '$uj' WHERE $oszlop = '$regi'";
+        return $this->kapcsolat->query($sql);
+    }
+    public function torles($tabla, $oszlop, $ertek)
+    {
+        $sql = "DELETE FROM $tabla WHERE $oszlop='$ertek'";
+        return $this->kapcsolat->query($sql);
+    }
     public function sorokSzama($tabla)
     {
         $sql = "SELECT * FROM $tabla";
